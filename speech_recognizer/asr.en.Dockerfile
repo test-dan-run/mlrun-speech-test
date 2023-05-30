@@ -1,4 +1,4 @@
-# docker build -f asr.en.Dockerfile -t dleongsh/mlrun/asr:1.2.1-torch2.0.1 .
+# docker build -f asr.en.Dockerfile -t zanonymous/mlrun-asr:1.2.1-torch2.0.1-redis .
 
 ARG PYTORCH_VERSION=2.0.1
 ARG CUDA_VERSION=11.7
@@ -17,7 +17,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
     apt-get -y update && \
     apt-get -y upgrade && \
     apt -y update && \
-    apt-get install --no-install-recommends -y gcc g++ libsndfile1 ffmpeg wget && \
+    apt-get install --no-install-recommends -y gcc g++ libsndfile1 ffmpeg wget git && \
     apt-get clean && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* && apt-get -y autoremove && \
     rm -rf /var/cache/apt/archives/
 
@@ -30,3 +30,6 @@ RUN python3 -m pip install --upgrade pip setuptools wheel && \
     pip3 install --no-cache-dir mlrun==${MLRUN_VERSION} redis
 
 WORKDIR /workspace
+
+RUN mkdir /models
+ADD models/* /models

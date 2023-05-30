@@ -1,8 +1,4 @@
-# docker build -f std.Dockerfile -t dleongsh/mlrun/std:1.2.1 .
-
-ARG PYTORCH_VERSION=2.0.1
-ARG CUDA_VERSION=11.7
-ARG CUDNN_VERSION=8
+# docker build -f std.Dockerfile -t dleongsh/mlrun/std:1.2.1-redis .
 
 FROM python:3.10.11-slim-buster
 
@@ -17,7 +13,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
     apt-get -y update && \
     apt-get -y upgrade && \
     apt -y update && \
-    apt-get install --no-install-recommends -y gcc libsndfile1 libsox-fmt-all ffmpeg sox wget && \
+    apt-get install --no-install-recommends -y gcc libsndfile1 libsox-fmt-all ffmpeg sox wget git && \
     apt-get clean && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* && apt-get -y autoremove && \
     rm -rf /var/cache/apt/archives/
 
