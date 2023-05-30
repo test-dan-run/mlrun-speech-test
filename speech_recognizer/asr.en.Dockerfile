@@ -27,6 +27,6 @@ ARG MLRUN_VERSION=1.2.1
 RUN python3 -m pip install --upgrade pip setuptools wheel && \
     pip3 install --no-cache-dir Cython==0.29.35 && \
     pip3 install --no-cache-dir nemo_toolkit[asr]==${NEMO_VERSION} && \
-    pip3 install --no-cache-dir mlrun==${MLRUN_VERSION}
+    pip3 install --no-cache-dir mlrun==${MLRUN_VERSION} redis
 
 WORKDIR /workspace
