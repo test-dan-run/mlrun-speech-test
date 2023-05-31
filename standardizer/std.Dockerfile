@@ -1,4 +1,4 @@
-# docker build -f std.Dockerfile -t dleongsh/mlrun/std:1.2.1-redis .
+# docker build -f std.Dockerfile -t zanonymous/mlrun-std:1.2.1-redis .
 
 FROM python:3.10.11-slim-buster
 
@@ -20,7 +20,9 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
 ARG MLRUN_VERSION=1.2.1
 
 RUN python3 -m pip install --upgrade pip setuptools wheel && \
-    pip3 install --no-cache-dir sox && \
-    pip3 install --no-cache-dir mlrun==${MLRUN_VERSION} redis
+    pip3 install --no-cache-dir sox
+
+# mlrun necessities
+RUN pip3 install --no-cache-dir mlrun==${MLRUN_VERSION} redis pyOpenSSL==19.0.0 kafka-python==2.0.2 
 
 WORKDIR /workspace
